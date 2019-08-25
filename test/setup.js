@@ -23,14 +23,15 @@ global.parseFloat = parseFloat
 
 let mongoServer
 
-var restore = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+var restore = jest.DEFAULT_TIMEOUT_INTERVAL
 // May require additional time for downloading MongoDB binaries
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
+jest.setTimeout(10000); // 10 second timeout
+
 
 beforeAll(async () => {
   mongoServer = new MongodbMemoryServer()
-  jasmine.DEFAULT_TIMEOUT_INTERVAL = restore;
   const mongoUri = await mongoServer.getConnectionString()
+  jest.setTimeout(restore);
   await mongoose.connect(mongoUri, { useNewUrlParser: true, useCreateIndex: true }, (err) => {
     if (err) console.error(err)
   })
