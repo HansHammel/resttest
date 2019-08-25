@@ -31,7 +31,7 @@ beforeAll(async () => {
   await mongoose.connect(mongoUri, { useNewUrlParser: true, useCreateIndex: true }, (err) => {
     if (err) console.error(err)
   })
-}, 60000)// May require additional time for downloading MongoDB binaries
+}, 60000) // May require additional time for downloading MongoDB binaries
 
 afterAll(async () => {
   await mongoose.disconnect()

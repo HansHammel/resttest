@@ -64,11 +64,20 @@ branches:
     - /^greenkeeper-.*$/
 
 before_install:
-  #- npm i npm@latest -g
+
+install:
+  #- npm i npm@latest -g 
+
+jobs:
+  include:
+    - if: os = linux
+      script:
+        - npm run lint
+        - npm run coverage
+        - npm run docs
 
 script:
   - npm run lintfix
   - npm test
-  - npm run coverage
-  - npm run lint
-  - npm run docs
+
+  
