@@ -22,8 +22,8 @@ export const create = ({ bodymen: { body: { email, link } } }, res, next) =>
       return sendMail({ toEmail: email, subject: 'Restgen - Password Reset', content })
     })
     .then(result => {
-      const response  = result ? result[0] : null;
-      return response ? res.status(response.statusCode).end() : null;
+      const response = result ? result[0] : null
+      return response ? res.status(response.statusCode).end() : null
     })
     .catch(next)
 
