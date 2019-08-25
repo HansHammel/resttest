@@ -1,0 +1,71 @@
+import request from 'supertest'
+import { apiRoot } from '../../config'
+import express from '../../services/express'
+import routes, { Masterroute } from '.'
+
+const app = () => express(apiRoot, routes)
+
+let masterroute
+
+beforeEach(async () => {
+  masterroute = await Masterroute.create({})
+})
+
+test('POST /masterroutes 201', async () => {
+  const { status, body } = await request(app())
+    .post(`${apiRoot}`)
+    .send({ bla: 'test' })
+  expect(status).toBe(201)
+  expect(typeof body).toEqual('object')
+  expect(body.bla).toEqual('test')
+})
+
+test('GET /masterroutes 200', async () => {
+  const { status, body } = await request(app())
+    .get(`${apiRoot}`)
+  expect(status).toBe(200)
+  expect(Array.isArray(body)).toBe(true)
+})
+
+test('GET /masterroutes/:id 200', async () => {
+  const { status, body } = await request(app())
+    .get(`${apiRoot}/${masterroute.id}`)
+  expect(status).toBe(200)
+  expect(typeof body).toEqual('object')
+  expect(body.id).toEqual(masterroute.id)
+})
+
+test('GET /masterroutes/:id 404', async () => {
+  const { status } = await request(app())
+    .get(apiRoot + '/123456789098765432123456')
+  expect(status).toBe(404)
+})
+
+test('PUT /masterroutes/:id 200', async () => {
+  const { status, body } = await request(app())
+    .put(`${apiRoot}/${masterroute.id}`)
+    .send({ bla: 'test' })
+  expect(status).toBe(200)
+  expect(typeof body).toEqual('object')
+  expect(body.id).toEqual(masterroute.id)
+  expect(body.bla).toEqual('test')
+})
+
+test('PUT /masterroutes/:id 404', async () => {
+  const { status } = await request(app())
+    .put(apiRoot + '/123456789098765432123456')
+    .send({ bla: 'test' })
+  expect(status).toBe(404)
+})
+
+test('DELETE /masterroutes/:id 204', async () => {
+  const { status } = await request(app())
+    .delete(`${apiRoot}/${masterroute.id}`)
+  expect(status).toBe(204)
+})
+
+test('DELETE /masterroutes/:id 404', async () => {
+  const { status } = await request(app())
+    .delete(apiRoot + '/123456789098765432123456')
+  expect(status).toBe(404)
+})

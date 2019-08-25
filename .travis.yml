@@ -1,0 +1,72 @@
+language: node_js
+
+sudo: false
+
+node_js:
+  - '8'
+  - '9'
+  - '10'
+  - '11'
+  - '12'
+  - lts/*
+  - node
+
+os:
+  - windows
+  - linux
+  - osx
+
+matrix:
+  allow_failures:
+    - os: windows
+
+cache:
+  directories:
+    - $HOME/.npm
+    - ~/.npm
+    - ~/.yarn-cache
+    - travis_phantomjs
+    - node_modules
+  npm: true
+  apt: true
+
+services:
+  - mongodb
+  #- mysql
+  #- redis
+  #- postgrsql
+
+dist: bionic
+
+addons:
+  apt:
+    sources:
+      #- ubuntu-toolchain-r-test
+      #- ppa:chris-lea/redis-server
+    packages:
+      #- redis-tools
+      #- redis-server
+      #- gcc-4.8
+      #- g++-4.8
+
+env:
+  global:
+    - NODE_ENV=testing  
+    #- CXX=g++-4.8
+    - SENDGRID_KEY=sendgridKey
+    - MASTER_KEY=masterKey
+    - JWT_SECRET=jwtSecret
+
+branches:
+  only:
+    - master
+    - /^greenkeeper-.*$/
+
+before_install:
+  - npm i -g npm@latest
+
+script:
+  - npm test
+  - npm run coverage
+  - npm run lint lint
+  - npm run docs
