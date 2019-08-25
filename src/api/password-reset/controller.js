@@ -21,15 +21,11 @@ export const create = ({ bodymen: { body: { email, link } } }, res, next) =>
       `
       return sendMail({ toEmail: email, subject: 'Restgen - Password Reset', content })
     })
-    //.then(([response]) => response ? res.status(response.statusCode).end() : null)
-    //.catch(next)
     .then(result => {
       const response  = result[0];
       return response ? res.status(response.statusCode).end() : null;
     })
-    .catch(err => {
-      return null;
-    })
+    .catch(next)
 
 export const show = ({ params: { token } }, res, next) =>
   PasswordReset.findOne({ token })
