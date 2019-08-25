@@ -23,19 +23,15 @@ global.parseFloat = parseFloat
 
 let mongoServer
 
-var restore = jest.DEFAULT_TIMEOUT_INTERVAL
-// May require additional time for downloading MongoDB binaries
-jest.setTimeout(10000); // 10 second timeout
 
 
 beforeAll(async () => {
   mongoServer = new MongodbMemoryServer()
   const mongoUri = await mongoServer.getConnectionString()
-  jest.setTimeout(restore);
   await mongoose.connect(mongoUri, { useNewUrlParser: true, useCreateIndex: true }, (err) => {
     if (err) console.error(err)
   })
-})
+}, 60000)// May require additional time for downloading MongoDB binaries
 
 afterAll(async () => {
   await mongoose.disconnect()
