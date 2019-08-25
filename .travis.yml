@@ -67,6 +67,7 @@ before_install:
   #- npm i npm@latest -g
 
 script:
+  - npm run lintfix
   - npm test
   - npm run coverage
   - npm run lint
