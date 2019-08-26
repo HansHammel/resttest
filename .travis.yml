@@ -73,12 +73,12 @@ install:
 
 stages:
   - name: Tests
-  - name: Tests Linting Coverage Docs
+  - name: Tests2
     if: os = linux
 
 jobs:
   include:
-    - stage: Tests Linting Coverage Docs
+    - stage: Tests2
       script:
         - npm run lint
         - npm run coverage
