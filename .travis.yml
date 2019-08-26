@@ -17,6 +17,7 @@ os:
   - osx
 
 matrix:
+  fast_finish: true
   allow_failures:
     - os: windows
 
@@ -40,6 +41,8 @@ dist: bionic
 
 #If you install a service in the addons: section, such as MariaDB, you do not need to add it to the services: section as well.
 addons:
+  hosts:
+  #- localhost.test
   apt:
     sources:
       #- ubuntu-toolchain-r-test
@@ -68,16 +71,23 @@ before_install:
 install:
   #- npm i npm@latest -g 
 
+stages:
+  - name: Tests
+  - name: Tests Linting Coverage Docs
+    if: os = linux
+
 jobs:
   include:
-    - if: os = linux
+    - stage: Tests Linting Coverage Docs
       script:
         - npm run lint
         - npm run coverage
         - npm run docs
 
-script:
-  - npm run lintfix
-  - npm test
+    - stage: Tests
+      script:
+        - npm run lintfix
+        - npm test
+
 
   
