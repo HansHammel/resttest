@@ -85,7 +85,8 @@ jobs:
       script:
         - npm run lint
         - npm run coverage
-        - npm run docs
+        - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run docs          ; fi
+        #- npm run docs
     - stage: Tests
       script:
         - npm run lintfix
