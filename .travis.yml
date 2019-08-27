@@ -72,12 +72,12 @@ install:
   #- npm i npm@latest -g 
 
 # the following line is needed to enable the TravisCI build conditions
-conditions: v1
+#conditions: v1
 
 stages:
   - name: Tests
   - name: Tests2
-    if: dist = bionic
+    #if: dist = bionic
 
 jobs:
   include:
