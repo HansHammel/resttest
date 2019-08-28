@@ -71,12 +71,10 @@ before_install:
 install:
   #- npm i npm@latest -g 
 
-
-
 script:
   - npm run lintfix
   - npm run lint
   - npm test
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run coverage      ; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run docs          ; fi
+  - if [[ "$TRAVIS_OS_NAME" = "linux" && "$TRAVIS_DIST" = "bionic" && "$(cut -d. -f1 <<< "$TRAVIS_NODE_VERSION")" -eq 10 ]]; then npm run coverage      ; fi
+  - if [[ "$TRAVIS_OS_NAME" = "linux" && "$TRAVIS_DIST" = "bionic" && "$(cut -d. -f1 <<< "$TRAVIS_NODE_VERSION")" -eq 10]]; then npm run docs          ; fi
  
