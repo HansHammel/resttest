@@ -71,26 +71,12 @@ before_install:
 install:
   #- npm i npm@latest -g 
 
-# the following line is needed to enable the TravisCI build conditions
-#conditions: v1
-
-stages:
-  - name: Tests
-  - name: Tests2
-    #if: dist = bionic
-
-jobs:
-  include:
-    - stage: Tests2
-      script:
-        - npm run lint
-        - npm run coverage
-        - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run docs          ; fi
-        #- npm run docs
-    - stage: Tests
-      script:
-        - npm run lintfix
-        - npm test
 
 
-  
+script:
+  - npm run lintfix
+  - npm run lint
+  - npm test
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run coverage      ; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run docs          ; fi
+ 
