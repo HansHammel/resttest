@@ -1,13 +1,13 @@
-import { Router } from 'express'
-import { middleware as query } from 'querymen'
-import { middleware as body } from 'bodymen'
-import { token } from '../../services/passport'
-import { create, index, show, update, destroy } from './controller'
-import { schema } from './model'
-export Adminroute, { schema } from './model'
+import { Router } from 'express';
+import { middleware as query } from 'querymen';
+import { middleware as body } from 'bodymen';
+import { token } from '../../services/passport';
+import { create, index, show, update, destroy } from './controller';
+import { schema } from './model';
+export Adminroute, { schema } from './model';
 
-const router = new Router()
-const { bla } = schema.tree
+const router = new Router();
+const { bla } = schema.tree;
 
 /**
  * @api {post} /adminroutes Create adminroute
@@ -21,10 +21,12 @@ const { bla } = schema.tree
  * @apiError 404 Adminroute not found.
  * @apiError 401 admin access only.
  */
-router.post('/',
+router.post(
+  '/',
   token({ required: true, roles: ['admin'] }),
   body({ bla }),
-  create)
+  create
+);
 
 /**
  * @api {get} /adminroutes Retrieve adminroutes
@@ -37,10 +39,7 @@ router.post('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 401 admin access only.
  */
-router.get('/',
-  token({ required: true, roles: ['admin'] }),
-  query(),
-  index)
+router.get('/', token({ required: true, roles: ['admin'] }), query(), index);
 
 /**
  * @api {get} /adminroutes/:id Retrieve adminroute
@@ -53,9 +52,7 @@ router.get('/',
  * @apiError 404 Adminroute not found.
  * @apiError 401 admin access only.
  */
-router.get('/:id',
-  token({ required: true, roles: ['admin'] }),
-  show)
+router.get('/:id', token({ required: true, roles: ['admin'] }), show);
 
 /**
  * @api {put} /adminroutes/:id Update adminroute
@@ -69,10 +66,12 @@ router.get('/:id',
  * @apiError 404 Adminroute not found.
  * @apiError 401 admin access only.
  */
-router.put('/:id',
+router.put(
+  '/:id',
   token({ required: true, roles: ['admin'] }),
   body({ bla }),
-  update)
+  update
+);
 
 /**
  * @api {delete} /adminroutes/:id Delete adminroute
@@ -84,8 +83,6 @@ router.put('/:id',
  * @apiError 404 Adminroute not found.
  * @apiError 401 admin access only.
  */
-router.delete('/:id',
-  token({ required: true, roles: ['admin'] }),
-  destroy)
+router.delete('/:id', token({ required: true, roles: ['admin'] }), destroy);
 
-export default router
+export default router;

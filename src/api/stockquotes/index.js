@@ -1,13 +1,30 @@
-import { Router } from 'express'
-import { middleware as query } from 'querymen'
-import { middleware as body } from 'bodymen'
-import { token } from '../../services/passport'
-import { create, index, show, update, destroy } from './controller'
-import { schema } from './model'
-export Stockquotes, { schema } from './model'
+import { Router } from 'express';
+import { middleware as query } from 'querymen';
+import { middleware as body } from 'bodymen';
+import { token } from '../../services/passport';
+import { create, index, show, update, destroy } from './controller';
+import { schema } from './model';
+export Stockquotes, { schema } from './model';
 
-const router = new Router()
-const { isin, wkn, symbol, date, currency, high, low, price, marketcap, kgv, dividentprecent, vola, high52, low52, country, exchange } = schema.tree
+const router = new Router();
+const {
+  isin,
+  wkn,
+  symbol,
+  date,
+  currency,
+  high,
+  low,
+  price,
+  marketcap,
+  kgv,
+  dividentprecent,
+  vola,
+  high52,
+  low52,
+  country,
+  exchange,
+} = schema.tree;
 
 /**
  * @api {post} /stockquotes Create stockquotes
@@ -36,10 +53,29 @@ const { isin, wkn, symbol, date, currency, high, low, price, marketcap, kgv, div
  * @apiError 404 Stockquotes not found.
  * @apiError 401 admin access only.
  */
-router.post('/',
+router.post(
+  '/',
   token({ required: true, roles: ['admin'] }),
-  body({ isin, wkn, symbol, date, currency, high, low, price, marketcap, kgv, dividentprecent, vola, high52, low52, country, exchange }),
-  create)
+  body({
+    isin,
+    wkn,
+    symbol,
+    date,
+    currency,
+    high,
+    low,
+    price,
+    marketcap,
+    kgv,
+    dividentprecent,
+    vola,
+    high52,
+    low52,
+    country,
+    exchange,
+  }),
+  create
+);
 
 /**
  * @api {get} /stockquotes Retrieve stockquotes
@@ -52,10 +88,7 @@ router.post('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 401 admin access only.
  */
-router.get('/',
-  token({ required: true, roles: ['admin'] }),
-  query(),
-  index)
+router.get('/', token({ required: true, roles: ['admin'] }), query(), index);
 
 /**
  * @api {get} /stockquotes/:id Retrieve stockquotes
@@ -68,9 +101,7 @@ router.get('/',
  * @apiError 404 Stockquotes not found.
  * @apiError 401 admin access only.
  */
-router.get('/:id',
-  token({ required: true, roles: ['admin'] }),
-  show)
+router.get('/:id', token({ required: true, roles: ['admin'] }), show);
 
 /**
  * @api {put} /stockquotes/:id Update stockquotes
@@ -99,10 +130,29 @@ router.get('/:id',
  * @apiError 404 Stockquotes not found.
  * @apiError 401 admin access only.
  */
-router.put('/:id',
+router.put(
+  '/:id',
   token({ required: true, roles: ['admin'] }),
-  body({ isin, wkn, symbol, date, currency, high, low, price, marketcap, kgv, dividentprecent, vola, high52, low52, country, exchange }),
-  update)
+  body({
+    isin,
+    wkn,
+    symbol,
+    date,
+    currency,
+    high,
+    low,
+    price,
+    marketcap,
+    kgv,
+    dividentprecent,
+    vola,
+    high52,
+    low52,
+    country,
+    exchange,
+  }),
+  update
+);
 
 /**
  * @api {delete} /stockquotes/:id Delete stockquotes
@@ -114,8 +164,6 @@ router.put('/:id',
  * @apiError 404 Stockquotes not found.
  * @apiError 401 admin access only.
  */
-router.delete('/:id',
-  token({ required: true, roles: ['admin'] }),
-  destroy)
+router.delete('/:id', token({ required: true, roles: ['admin'] }), destroy);
 
-export default router
+export default router;

@@ -1,64 +1,69 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Schema } from 'mongoose';
 
-const stockquotesSchema = new Schema({
-  isin: {
-    type: String
+const stockquotesSchema = new Schema(
+  {
+    isin: {
+      type: String,
+    },
+    wkn: {
+      type: String,
+    },
+    symbol: {
+      type: String,
+    },
+    date: {
+      type: String,
+    },
+    currency: {
+      type: String,
+    },
+    high: {
+      type: String,
+    },
+    low: {
+      type: String,
+    },
+    price: {
+      type: String,
+    },
+    marketcap: {
+      type: String,
+    },
+    kgv: {
+      type: String,
+    },
+    dividentprecent: {
+      type: String,
+    },
+    vola: {
+      type: String,
+    },
+    high52: {
+      type: String,
+    },
+    low52: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
+    exchange: {
+      type: String,
+    },
   },
-  wkn: {
-    type: String
-  },
-  symbol: {
-    type: String
-  },
-  date: {
-    type: String
-  },
-  currency: {
-    type: String
-  },
-  high: {
-    type: String
-  },
-  low: {
-    type: String
-  },
-  price: {
-    type: String
-  },
-  marketcap: {
-    type: String
-  },
-  kgv: {
-    type: String
-  },
-  dividentprecent: {
-    type: String
-  },
-  vola: {
-    type: String
-  },
-  high52: {
-    type: String
-  },
-  low52: {
-    type: String
-  },
-  country: {
-    type: String
-  },
-  exchange: {
-    type: String
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (obj, ret) => {
+        delete ret._id;
+      },
+    },
   }
-}, {
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: (obj, ret) => { delete ret._id }
-  }
-})
+);
 
 stockquotesSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
@@ -79,17 +84,19 @@ stockquotesSchema.methods = {
       country: this.country,
       exchange: this.exchange,
       createdAt: this.createdAt,
-      updatedAt: this.updatedAt
-    }
+      updatedAt: this.updatedAt,
+    };
 
-    return full ? {
-      ...view
-      // add properties for a full view
-    } : view
-  }
-}
+    return full
+      ? {
+          ...view,
+          // add properties for a full view
+        }
+      : view;
+  },
+};
 
-const model = mongoose.model('Stockquotes', stockquotesSchema)
+const model = mongoose.model('Stockquotes', stockquotesSchema);
 
-export const schema = model.schema
-export default model
+export const schema = model.schema;
+export default model;

@@ -1,12 +1,12 @@
-import { Router } from 'express'
-import { middleware as query } from 'querymen'
-import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy } from './controller'
-import { schema } from './model'
-export Masterroute, { schema } from './model'
+import { Router } from 'express';
+import { middleware as query } from 'querymen';
+import { middleware as body } from 'bodymen';
+import { create, index, show, update, destroy } from './controller';
+import { schema } from './model';
+export Masterroute, { schema } from './model';
 
-const router = new Router()
-const { bla } = schema.tree
+const router = new Router();
+const { bla } = schema.tree;
 
 /**
  * @api {post} /masterroutes Create masterroute
@@ -17,9 +17,7 @@ const { bla } = schema.tree
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Masterroute not found.
  */
-router.post('/',
-  body({ bla }),
-  create)
+router.post('/', body({ bla }), create);
 
 /**
  * @api {get} /masterroutes Retrieve masterroutes
@@ -29,9 +27,7 @@ router.post('/',
  * @apiSuccess {Object[]} masterroutes List of masterroutes.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get('/',
-  query(),
-  index)
+router.get('/', query(), index);
 
 /**
  * @api {get} /masterroutes/:id Retrieve masterroute
@@ -41,8 +37,7 @@ router.get('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Masterroute not found.
  */
-router.get('/:id',
-  show)
+router.get('/:id', show);
 
 /**
  * @api {put} /masterroutes/:id Update masterroute
@@ -53,9 +48,7 @@ router.get('/:id',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Masterroute not found.
  */
-router.put('/:id',
-  body({ bla }),
-  update)
+router.put('/:id', body({ bla }), update);
 
 /**
  * @api {delete} /masterroutes/:id Delete masterroute
@@ -64,7 +57,6 @@ router.put('/:id',
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Masterroute not found.
  */
-router.delete('/:id',
-  destroy)
+router.delete('/:id', destroy);
 
-export default router
+export default router;

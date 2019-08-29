@@ -1,41 +1,48 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Schema } from 'mongoose';
 
-const userrouteSchema = new Schema({
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User',
-    required: true
+const userrouteSchema = new Schema(
+  {
+    user: {
+      type: Schema.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    bla: {
+      type: String,
+    },
   },
-  bla: {
-    type: String
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (obj, ret) => {
+        delete ret._id;
+      },
+    },
   }
-}, {
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: (obj, ret) => { delete ret._id }
-  }
-})
+);
 
 userrouteSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
       user: this.user.view(full),
       bla: this.bla,
       createdAt: this.createdAt,
-      updatedAt: this.updatedAt
-    }
+      updatedAt: this.updatedAt,
+    };
 
-    return full ? {
-      ...view
-      // add properties for a full view
-    } : view
-  }
-}
+    return full
+      ? {
+          ...view,
+          // add properties for a full view
+        }
+      : view;
+  },
+};
 
-const model = mongoose.model('Userroute', userrouteSchema)
+const model = mongoose.model('Userroute', userrouteSchema);
 
-export const schema = model.schema
-export default model
+export const schema = model.schema;
+export default model;
