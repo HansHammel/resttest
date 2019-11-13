@@ -28,7 +28,7 @@
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.5.5",
-    "apidoc": "^0.17.7",
+    "apidoc": "^0.18.0",
     "apidoc-markdown": "^0.2.1",
     "babel-eslint": "^10.0.3",
     "cross-env": "^5.2.0",
