@@ -64,7 +64,7 @@
     "express": "^4.17.1",
     "express-force-ssl": "^0.3.2",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.16",
     "mongoose": "^5.9.5",
     "mongoose-keywords": "^0.4.0",
     "morgan": "^1.9.1",
