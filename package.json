@@ -53,10 +53,10 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.5.5",
-    "@sendgrid/mail": "^6.4.0",
-    "bcrypt": "^3.0.6",
-    "bluebird": "^3.5.5",
+    "@babel/runtime": "^7.8.7",
+    "@sendgrid/mail": "^6.5.4",
+    "bcrypt": "^3.0.8",
+    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "bodymen": "^1.1.0",
     "compression": "^1.7.4",
@@ -65,7 +65,7 @@
     "express-force-ssl": "^0.3.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "mongoose": "^5.6.11",
+    "mongoose": "^5.9.5",
     "mongoose-keywords": "^0.4.0",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
